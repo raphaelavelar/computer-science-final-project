@@ -19,7 +19,7 @@ class UserAuthenticationSerializer(serializers.ModelSerializer):
 
 class ApplicationUserAuthenticationSerializer(serializers.ModelSerializer):
     """
-    Application user serializer
+    Application user authentication serializer
     """
     user = UserAuthenticationSerializer()
 
@@ -38,3 +38,38 @@ class ApplicationUserAuthenticationSerializer(serializers.ModelSerializer):
         application_user.save()
 
         return application_user
+
+class UserSerializer(serializers.ModelSerializer):
+    """
+    User serializer
+    """
+
+    class Meta:
+        """
+        Model and fields specification
+        """
+        model = User
+        fields = ("username", "first_name", "last_name", "email")
+
+class ApplicationUserSerializer(serializers.ModelSerializer):
+    """
+    Application user serializer
+    """
+    user = UserSerializer()
+
+    class Meta:
+        """
+        Model and fields specification
+        """
+        model = ApplicationUser
+        fields = ("user", "bio", "profile_picture")
+
+    def to_representation(self, instance):
+        return {
+            "username": instance.user.username,
+            "first_name": instance.user.first_name,
+            "last_name": instance.user.last_name,
+            "email": instance.user.email,
+            "bio": instance.bio,
+            "profile_picture": instance.profile_picture if instance.profile_picture else None,
+        }
