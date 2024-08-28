@@ -1,9 +1,10 @@
 """
 API for users application
 """
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView
 from rest_framework import status
 from rest_framework.response import Response
+from django.contrib.auth import logout
 from users.serializers import ApplicationUserAuthenticationSerializer, UserAuthenticationSerializer, ApplicationUserSerializer
 from users.models import ApplicationUser
 
@@ -48,3 +49,13 @@ class ApplicationUserDetail(RetrieveUpdateDestroyAPIView):
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+class ApplicationUserLogout(GenericAPIView):
+    """
+    Logout an application user
+    """
+    
+    def post(self, request, *args, **kwargs):
+        logout(request)
+
+        return Response(status=status.HTTP_200_OK)
