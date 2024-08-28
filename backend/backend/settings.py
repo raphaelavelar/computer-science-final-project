@@ -40,6 +40,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 INSTALLED_APPS = [
     "users.apps.UsersConfig",
+    "map.apps.MapConfig",
     "rest_framework",
     "rest_framework.authtoken",
     "django.contrib.admin",
