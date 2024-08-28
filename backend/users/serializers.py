@@ -2,6 +2,7 @@
 Serializers for users application
 """
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from django.contrib.auth.models import User
 from users.models import ApplicationUser
 
@@ -56,6 +57,10 @@ class ApplicationUserSerializer(UserSerializer):
     Application user serializer
     """
     username = UserSerializer().get_fields()["username"]
+    print(username.__dict__)
+    # for validator in username.validators:
+    #     if isinstance(validator, UniqueValidator):
+    #         username.validators.remove(validator)
     first_name = UserSerializer().get_fields()["first_name"]
     last_name = UserSerializer().get_fields()["last_name"]
     email = UserSerializer().get_fields()["email"]
