@@ -51,18 +51,21 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ("username", "first_name", "last_name", "email")
 
-class ApplicationUserSerializer(serializers.ModelSerializer):
+class ApplicationUserSerializer(UserSerializer):
     """
     Application user serializer
     """
-    user = UserSerializer()
+    username = UserSerializer().get_fields()["username"]
+    first_name = UserSerializer().get_fields()["first_name"]
+    last_name = UserSerializer().get_fields()["last_name"]
+    email = UserSerializer().get_fields()["email"]
 
     class Meta:
         """
         Model and fields specification
         """
         model = ApplicationUser
-        fields = ("user", "bio", "profile_picture")
+        fields = ("username", "first_name", "last_name", "email", "bio", "profile_picture")
 
     def to_representation(self, instance):
         return {
