@@ -11,16 +11,9 @@ export class UserService {
 
     constructor(private _httpClient: HttpClient) { }
 
-    public register(registerUser: UserRegister): Observable<void> {
-        const url = `${environment.apiUrl}/users?format=api`;
+    public register(registerUser: UserRegister): Observable<any> {
+        const url = `${environment.apiUrl}/api/users/`;
 
-        return this._httpClient.post<void>(url, registerUser, {
-          headers: {
-            "Referrer-policy": "no-referrer",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Access-Control-Allow-Origin,Access-Control-Allow-Methods",
-            "Access-Control-Allow-Methods": "OPTION,GET,POST"
-          }
-        });
+        return this._httpClient.post(url, registerUser);
     }
 }
