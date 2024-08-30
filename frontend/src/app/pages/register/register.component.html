@@ -1,1 +1,27 @@
-<p>register works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="mb-2" hintLabel="Max 150 characters">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" maxLength="150" placeholder="Username" required>
+        <mat-hint align="end">{{ form.controls.username.value.length }}/150</mat-hint>
+        @if (form.controls.username.hasError("required")) {
+            <mat-error>The username is required</mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field hintLabel="Max 254 characters">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Email" required>
+        <mat-hint align="end">{{ form.controls.email.value.length }}/254</mat-hint>
+        @if (form.controls.email.hasError("required")) {
+            <mat-error>The email is required</mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field hintLabel="Max 128 characters">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Password" required>
+        <mat-hint align="end">{{ form.controls.password.value.length }}/128</mat-hint>
+        @if (form.controls.password.hasError("required")) {
+            <mat-error>The password is required</mat-error>
+        }
+    </mat-form-field>
+    <button mat-flat-button type="submit">Register</button>
+</form>
