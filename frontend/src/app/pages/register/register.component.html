@@ -23,5 +23,5 @@
             <mat-error>The password is required</mat-error>
         }
     </mat-form-field>
-    <button mat-flat-button type="submit">Register</button>
+    <button mat-flat-button type="submit" [disabled]="!(form.valid)">Register</button>
 </form>
