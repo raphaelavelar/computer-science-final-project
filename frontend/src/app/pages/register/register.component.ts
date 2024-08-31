@@ -41,7 +41,11 @@ export class RegisterComponent {
             
             this._userService.register(user).subscribe({
                 next: () => this._router.navigate(["/"]),
-                error: (error) => console.log(error)
+                error: (error) => {
+                    for(const [key, value] of Object.entries(error.error)) {
+                        this.form.controls[key].setErrors(value);
+                    }
+                }
             })
         }
     }

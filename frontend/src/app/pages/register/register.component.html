@@ -5,6 +5,8 @@
         <mat-hint align="end">{{ form.controls.username.value.length }}/150</mat-hint>
         @if (form.controls.username.hasError("required")) {
             <mat-error>The username is required</mat-error>
+        } @else if(form.controls.username.errors) {
+            <mat-error>{{ form.controls.username.errors }}</mat-error>
         }
     </mat-form-field>
     <mat-form-field hintLabel="Max 254 characters">
@@ -13,6 +15,8 @@
         <mat-hint align="end">{{ form.controls.email.value.length }}/254</mat-hint>
         @if (form.controls.email.hasError("required")) {
             <mat-error>The email is required</mat-error>
+        } @else if(form.controls.email.errors) {
+            <mat-error>{{ form.controls.email.errors }}</mat-error>
         }
     </mat-form-field>
     <mat-form-field hintLabel="Max 128 characters">
@@ -21,6 +25,8 @@
         <mat-hint align="end">{{ form.controls.password.value.length }}/128</mat-hint>
         @if (form.controls.password.hasError("required")) {
             <mat-error>The password is required</mat-error>
+        } @else if(form.controls.password.errors) {
+            <mat-error>{{ form.controls.password.errors }}</mat-error>
         }
     </mat-form-field>
     <button mat-flat-button type="submit" [disabled]="!(form.valid)">Register</button>
