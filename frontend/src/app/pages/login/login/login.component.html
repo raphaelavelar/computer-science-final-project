@@ -1,1 +1,24 @@
-<p>login works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="mb-2" hintLabel="Max 150 characters">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" maxLength="150" placeholder="Username" required>
+        @if (form.controls.username.hasError("required")) {
+            <mat-error>The username is required</mat-error>
+        } @else if(form.controls.username.errors) {
+            <mat-error>{{ form.controls.username.errors }}</mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field hintLabel="Max 128 characters">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Password" required>
+        @if (form.controls.password.hasError("required")) {
+            <mat-error>The password is required</mat-error>
+        } @else if(form.controls.password.errors) {
+            <mat-error>{{ form.controls.password.errors }}</mat-error>
+        }
+    </mat-form-field>
+    @if (form.controls.non_field_errors.errors) {
+        <mat-error>{{ form.controls.non_field_errors.errors }}</mat-error>
+    }
+    <button mat-flat-button type="submit">Register</button>
+</form>
