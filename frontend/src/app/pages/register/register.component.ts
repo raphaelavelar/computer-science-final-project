@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { UserRegister } from '../../interfaces/user';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-register',
@@ -38,10 +39,10 @@ export class RegisterComponent {
                 email: this.form.controls.email.value,
                 password: this.form.controls.password.value,
             }
-            
+
             this._userService.register(user).subscribe({
-                next: () => this._router.navigate(["/"]),
-                error: (error) => {
+                next: () => this._router.navigate(["/login"]),
+                error: (error: HttpErrorResponse) => {
                     for(const [key, value] of Object.entries(error.error)) {
                         this.form.controls[key].setErrors(value);
                     }
