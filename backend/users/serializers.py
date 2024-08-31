@@ -34,7 +34,9 @@ class ApplicationUserAuthenticationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user_data = validated_data["user"]
-        user = User.objects.create(username=user_data["username"], email=user_data["email"], password=user_data["password"])
+        user = User.objects.create(username=user_data["username"], email=user_data["email"])
+        user.set_password(user_data["password"])
+        user.save()
         application_user = ApplicationUser.objects.create(user=user)
         application_user.save()
 
