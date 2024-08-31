@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,24 +27,47 @@ SECRET_KEY = "django-insecure-3e4ei^t9*-pc($60r3rubo_67sghg&d4eq2$c8^kodt+hz0me=
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://*.preview.app.github.dev/",
+    "127.0.0.1",
+    "https://*.app.github.dev",
     "localhost",
+    "https://effective-space-train-7x9jj69v996cx96j-4200.app.github.dev"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.preview.app.github.dev/",
-    "https://localhost:8000"
+    "https://*.app.github.dev",
+    "https://localhost",
+    "http://127.0.0.1",
+    "https://effective-space-train-7x9jj69v996cx96j-4200.app.github.dev"
 ]
 
-
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://*.app.github.dev",
+    "https://localhost",
+    "http://127.0.0.1",
+    "https://effective-space-train-7x9jj69v996cx96j-4200.app.github.dev"
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    *default_headers,
+    "Access-Control-Allow-Origin",
+    "Access-Control-Request-Headers",
+    "Access-Control-Allow-Headers",
+]
+CORS_EXPOSE_HEADERS = [
+    "Access-Control-Allow-Origin",
+    "Access-Control-Request-Headers",
+    "Access-Control-Allow-Headers",
+]
 # Application definition
 
 INSTALLED_APPS = [
+    "rest_framework",
+    "rest_framework.authtoken",
+    "corsheaders",
     "users.apps.UsersConfig",
     "map.apps.MapConfig",
     "posts.apps.PostsConfig",
-    "rest_framework",
-    "rest_framework.authtoken",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -53,6 +77,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
