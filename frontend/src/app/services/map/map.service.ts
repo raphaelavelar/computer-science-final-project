@@ -19,6 +19,6 @@ export class MapService {
     }
 
     public list() {
-        return this._httpClient.get<Map[]>("aa");
+        return this._httpClient.get<Map[]>(this.url);
     }
 }
