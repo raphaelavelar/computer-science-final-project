@@ -32,10 +32,11 @@ export class ViewComponent {
         this._mapService.list().subscribe({
             next: (mapItems: Map[]) => {
                 mapItems.forEach((mapItem: Map) => {
-                    marker([mapItem.latitude, mapItem.longitude], {
+                    const mapMarker = marker([mapItem.latitude, mapItem.longitude], {
                         title: mapItem.name,
                         riseOnHover: true,
                     }).addTo(mapView);
+                    mapMarker.bindPopup(`<h1>${mapItem.name}</h1><p>${mapItem.description}</p><a href="/map/${mapItem.id}">Details</a>`);
                 });
             },
             error: (error: HttpErrorResponse) => {
