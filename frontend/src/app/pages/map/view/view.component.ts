@@ -73,7 +73,5 @@ export class ViewComponent {
                 });
             }
         })
-
-        
     }
 }
