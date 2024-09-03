@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { map, tileLayer, marker, icon } from 'leaflet';
+import { map, tileLayer, marker, icon, popup } from 'leaflet';
 import { MapService } from '../../../services/map/map.service';
 import { Map } from '../../../interfaces/map';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -50,6 +50,9 @@ export class ViewComponent {
             maxNativeZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(mapView);
+        mapView.on("click", (e) => {
+            popup().setLatLng(e.latlng).setContent(`Latitude: ${e.latlng.lat} <br /> Longitude: ${e.latlng.lng}`).openOn(mapView);
+        })
 
         this._mapService.list().subscribe({
             next: (mapItems: Map[]) => {
