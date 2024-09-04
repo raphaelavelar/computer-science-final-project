@@ -42,7 +42,7 @@ export class LoginComponent {
             this._userService.login(user).subscribe({
                 next: () => this._router.navigate(["/"]),
                 error: (error: HttpErrorResponse) => {
-                    console.log(error)
+                    console.error(error)
                     for(const [key, value] of Object.entries(error.error)) {
                         this.form.controls[key].setErrors(value);
                     }
