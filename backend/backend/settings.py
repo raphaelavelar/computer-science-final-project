@@ -28,37 +28,23 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
-    "https://*.app.github.dev",
     "localhost",
-    "https://effective-space-train-7x9jj69v996cx96j-4200.app.github.dev"
+    "https://*.app.github.dev",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.app.github.dev",
-    "https://localhost",
     "http://127.0.0.1",
-    "https://effective-space-train-7x9jj69v996cx96j-4200.app.github.dev"
+    "https://localhost",
+    "https://*.app.github.dev",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://*.app.github.dev",
-    "https://localhost",
     "http://127.0.0.1",
-    "https://effective-space-train-7x9jj69v996cx96j-4200.app.github.dev"
+    "https://localhost",
+    "https://*.app.github.dev",
 ]
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = [
-    *default_headers,
-    "Access-Control-Allow-Origin",
-    "Access-Control-Request-Headers",
-    "Access-Control-Allow-Headers",
-]
-CORS_EXPOSE_HEADERS = [
-    "Access-Control-Allow-Origin",
-    "Access-Control-Request-Headers",
-    "Access-Control-Allow-Headers",
-]
+
 # Application definition
 
 INSTALLED_APPS = [
