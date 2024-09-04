@@ -43,6 +43,7 @@ export class RegisterComponent {
             this._userService.register(user).subscribe({
                 next: () => this._router.navigate(["/login"]),
                 error: (error: HttpErrorResponse) => {
+                    console.log(error);
                     for(const [key, value] of Object.entries(error.error)) {
                         this.form.controls[key].setErrors(value);
                     }
