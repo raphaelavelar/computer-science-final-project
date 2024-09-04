@@ -2,6 +2,7 @@
 API for posts application
 """
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from users.models import ApplicationUser
 from posts.models import Post
 from posts.serializers import PostListSerializer, PostCreateSerializer, PostDetailSerializer
 
@@ -16,6 +17,11 @@ class PostAll(ListCreateAPIView):
         self.serializer_class = PostListSerializer
 
         return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        application_user = ApplicationUser.objects.get(user=request.user)
+        request.data["author"] = application_user.pk
+        return self.create(request, *args, **kwargs)
 
 class PostDetail(RetrieveUpdateDestroyAPIView):
     """
