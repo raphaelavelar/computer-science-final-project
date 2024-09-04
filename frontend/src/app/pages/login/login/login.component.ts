@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserLogin } from '../../../interfaces/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../services/user/user.service';
+import { setToken } from '../../../helpers/auth.helper';
 
 @Component({
     selector: 'app-login',
@@ -40,11 +41,16 @@ export class LoginComponent {
             }
 
             this._userService.login(user).subscribe({
-                next: () => this._router.navigate(["/"]),
+                next: (response) => {
+                    setToken(response.token);
+                    this._router.navigate(["/"]);
+                },
                 error: (error: HttpErrorResponse) => {
                     console.error(error)
                     for(const [key, value] of Object.entries(error.error)) {
-                        this.form.controls[key].setErrors(value);
+                        if(key in this.form.controls) {
+                            this.form.controls[key].setErrors(value);
+                        }
                     }
                     this.form.valid = true
                 }
