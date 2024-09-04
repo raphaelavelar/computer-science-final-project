@@ -1,1 +1,13 @@
-<p>layout works!</p>
+<mat-sidenav-container class="example-container" hasBackdrop="true">
+    <mat-sidenav #sidenav mode="side" position="start">
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <nav class="d-flex flex-row">
+            <button mat-mini-fab (click)="sidenav.toggle()" aria-label="Open menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <h1 class="flex-fill text-center">Relevare</h1>
+        </nav>
+        <ng-content></ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>
