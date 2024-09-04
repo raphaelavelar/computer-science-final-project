@@ -2,7 +2,8 @@ import { Routes } from '@angular/router';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login/login.component';
 import { ViewComponent } from './pages/map/view/view.component';
-import { CreateComponent } from './pages/map/create/create.component';
+import { CreateComponent as MapCreateComponent } from './pages/map/create/create.component';
+import { CreateComponent as PostCreateComponent } from './pages/posts/create/create.component';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,10 @@ export const routes: Routes = [
     },
     {
         path: "map",
-        component: CreateComponent
+        component: MapCreateComponent
+    },
+    {
+        path: "post",
+        component: PostCreateComponent
     },
 ];
