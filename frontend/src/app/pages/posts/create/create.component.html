@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="mb-2" hintLabel="Max 150 characters">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" maxLength="150" placeholder="Title" required>
+        <mat-hint align="end">{{ form.controls.title.value.length }}/150</mat-hint>
+        @if (form.controls.title.hasError("required")) {
+            <mat-error>The title is required</mat-error>
+        } @else if(form.controls.title.errors) {
+            <mat-error>{{ form.controls.title.errors }}</mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field class="mb-2" hintLabel="Max 1,500 characters">
+        <mat-label>Content</mat-label>
+        <textarea matInput formControlName="content" maxLength="1500" placeholder="Content" required></textarea>
+        <mat-hint align="end">{{ form.controls.content.value.length }}/1,500</mat-hint>
+        @if (form.controls.content.hasError("required")) {
+            <mat-error>The content is required</mat-error>
+        } @else if(form.controls.content.errors) {
+            <mat-error>{{ form.controls.content.errors }}</mat-error>
+        }
+    </mat-form-field>
+    <button mat-flat-button type="submit" [disabled]="!(form.valid)">Create</button>
+</form>
