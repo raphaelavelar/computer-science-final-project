@@ -45,7 +45,9 @@ export class RegisterComponent {
                 error: (error: HttpErrorResponse) => {
                     console.log(error);
                     for(const [key, value] of Object.entries(error.error)) {
-                        this.form.controls[key].setErrors(value);
+                        if(key in this.form.controls) {
+                            this.form.controls[key].setErrors(value);
+                        }
                     }
                 }
             })
