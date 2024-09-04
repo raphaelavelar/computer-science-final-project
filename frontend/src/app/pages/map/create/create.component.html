@@ -12,7 +12,7 @@
     <mat-form-field class="mb-2" hintLabel="Max 500 characters">
         <mat-label>Description</mat-label>
         <input matInput formControlName="description" maxLength="500" placeholder="Description" required>
-        <mat-hint align="end">{{ form.controls.name.value.length }}/500</mat-hint>
+        <mat-hint align="end">{{ form.controls.description.value.length }}/500</mat-hint>
         @if (form.controls.description.hasError("required")) {
             <mat-error>The description is required</mat-error>
         } @else if(form.controls.description.errors) {
