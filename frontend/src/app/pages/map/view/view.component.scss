@@ -1,3 +1,4 @@
 #map {
-    height: 100%;
+    // This is calculated by removing the navigation size from the page's size
+    height: calc(100% - 56px);
 }
