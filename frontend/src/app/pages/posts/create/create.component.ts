@@ -46,7 +46,9 @@ export class CreateComponent {
               error: (error: HttpErrorResponse) => {
                   console.error(error)
                   for(const [key, value] of Object.entries(error.error)) {
-                      this.form.controls[key].setErrors(value);
+                        if(key in this.form.controls) {
+                            this.form.controls[key].setErrors(value);
+                        }
                   }
                   this._snackBar.open(`An error occurred when creating the new item`, "Okay", {
                       duration: 3000

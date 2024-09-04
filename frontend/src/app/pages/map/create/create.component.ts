@@ -29,7 +29,7 @@ export class CreateComponent {
   public ngOnInit() {
       this.form = this._formBuilder.group({
           name: ["", [Validators.required, Validators.maxLength(150)]],
-          description: ["", [Validators.required, Validators.maxLength(128)]],
+          description: ["", [Validators.required, Validators.maxLength(500)]],
           latitude: ["", [Validators.max(90.0), Validators.min(-90.0)]],
           longitude: ["", [Validators.max(180.0), Validators.min(-180.0)]],
       })
@@ -49,7 +49,9 @@ export class CreateComponent {
               error: (error: HttpErrorResponse) => {
                   console.error(error)
                   for(const [key, value] of Object.entries(error.error)) {
-                      this.form.controls[key].setErrors(value);
+                    if(key in this.form.controls) {
+                        this.form.controls[key].setErrors(value);
+                    }
                   }
                   this._snackBar.open(`An error occurred when creating the new item`, "Okay", {
                       duration: 3000
