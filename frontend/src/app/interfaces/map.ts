@@ -1,5 +1,5 @@
 export interface Map {
-    id: number;
+    id?: number;
     name: string;
     description: string;
     latitude: number;
