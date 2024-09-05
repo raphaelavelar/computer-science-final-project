@@ -41,7 +41,7 @@ export class LoginComponent {
             }
 
             this._userService.login(user).subscribe({
-                next: (response) => {
+                next: (response: any) => {
                     setToken(response.token);
                     this._router.navigate(["/"]);
                 },
