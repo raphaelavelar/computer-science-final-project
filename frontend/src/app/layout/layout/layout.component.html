@@ -4,15 +4,29 @@
             <a mat-button href="/map/view">Map
                 <mat-icon>public</mat-icon>
             </a>
-            <a mat-button href="/map">Create a map item
-                <mat-icon>location_on</mat-icon>
-            </a>
+            @if (isUserLoggedIn) {
+                <a mat-button href="/map">Create a map item
+                    <mat-icon>location_on</mat-icon>
+                </a>
+            }
             <a mat-button href="/">Posts
                 <mat-icon>local_post_office</mat-icon>
             </a>
-            <a mat-button href="/post">Create a new post
-                <mat-icon>post_add</mat-icon>
-            </a>
+            @if (isUserLoggedIn) {
+                <a mat-button href="/post">Create a new post
+                    <mat-icon>post_add</mat-icon>
+                </a>
+                <button mat-button (click)="logout()">Logout
+                    <mat-icon>logout</mat-icon>
+                </button>
+            } @else {
+                <a mat-button href="/login">Login
+                    <mat-icon>login</mat-icon>
+                </a>
+                <a mat-button href="/register">Register
+                    <mat-icon>person_add</mat-icon>
+                </a>
+            }
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
