@@ -19,6 +19,21 @@
             <mat-error>{{ form.controls.description.errors }}</mat-error>
         }
     </mat-form-field>
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+            <mat-option value="danger">Danger</mat-option>
+            <mat-option value="food bank">Food bank</mat-option>
+            <mat-option value="medical services">Medical services</mat-option>
+            <mat-option value="people">People</mat-option>
+            <mat-option value="person">Person</mat-option>
+            <mat-option value="pet shelter">Pet shelter</mat-option>
+            <mat-option value="search">Search</mat-option>
+            <mat-option value="shelter">Shelter</mat-option>
+            <mat-option value="warning">Warning</mat-option>
+            <mat-option value="water">Water</mat-option>
+        </mat-select>
+    </mat-form-field>
     <mat-form-field class="mb-2" hintLabel="The latitude needs to be between -90.0 and 90.0">
         <mat-label>Latitude</mat-label>
         <input matInput type="number" formControlName="latitude" min="-90.0" max="90.0" placeholder="Latitude" required>

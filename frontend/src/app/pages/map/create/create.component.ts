@@ -8,11 +8,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Map } from '../../../interfaces/map';
 import { MapService } from '../../../services/map/map.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss'
 })
@@ -30,6 +31,7 @@ export class CreateComponent {
       this.form = this._formBuilder.group({
           name: ["", [Validators.required, Validators.maxLength(150)]],
           description: ["", [Validators.required, Validators.maxLength(500)]],
+          category: ["", [Validators.required]],
           latitude: ["", [Validators.max(90.0), Validators.min(-90.0)]],
           longitude: ["", [Validators.max(180.0), Validators.min(-180.0)]],
       })
@@ -37,14 +39,15 @@ export class CreateComponent {
 
   public onSubmit() {
       if(this.form.valid) {
-          const Map: Map = {
+          const map: Map = {
               name: this.form.controls.name.value,
               description: this.form.controls.description.value,
+              category: this.form.controls.category.value,
               latitude: this.form.controls.latitude.value,
               longitude: this.form.controls.longitude.value,
           }
 
-          this._mapService.create(Map).subscribe({
+          this._mapService.create(map).subscribe({
               next: () => this._router.navigate(["/map/view"]),
               error: (error: HttpErrorResponse) => {
                   console.error(error)
