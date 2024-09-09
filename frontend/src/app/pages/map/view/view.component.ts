@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { map, tileLayer, marker, icon, popup } from 'leaflet';
+import { map, tileLayer, marker, icon, popup, Icon } from 'leaflet';
 import { MapService } from '../../../services/map/map.service';
 import { Map } from '../../../interfaces/map';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,13 +17,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     styleUrl: './view.component.scss'
 })
 export class ViewComponent {
-    icons = {
+    icons: {[id: string] : Icon} = {
         "danger": this._createIcon("danger.svg"),
-        "food bank": this._createIcon("food bank.svg"),
-        "medical services": this._createIcon("medical services.svg"),
+        "food bank": this._createIcon("food-bank.svg"),
+        "medical services": this._createIcon("medical-services.svg"),
         "people": this._createIcon("people.svg"),
         "person": this._createIcon("person.svg"),
-        "pet shelter": this._createIcon("pet shelter.svg"),
+        "pet shelter": this._createIcon("pet-shelter.svg"),
         "search": this._createIcon("search.svg"),
         "shelter": this._createIcon("shelter.svg"),
         "warning": this._createIcon("warning.svg"),
@@ -57,11 +57,10 @@ export class ViewComponent {
         this._mapService.list().subscribe({
             next: (mapItems: Map[]) => {
                 mapItems.forEach((mapItem: Map) => {
-
                     const mapMarker = marker([mapItem.latitude, mapItem.longitude], {
                         title: mapItem.name,
                         riseOnHover: true,
-                        icon: this.icons["search"]
+                        icon: this.icons[mapItem.category]
                     }).addTo(mapView);
                     mapMarker.bindPopup(`<h1>${mapItem.name}</h1><p>${mapItem.description}</p><a href="/map/${mapItem.id}">Details</a>`);
                 });
